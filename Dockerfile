@@ -4,7 +4,7 @@ USER root
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y apt-utils apt-transport-https ca-certificates curl gpg gnupg python3 python3-pip software-properties-common unzip && \
+    apt-get install -y apt-utils apt-transport-https ca-certificates curl wget gpg gnupg python3 python3-pip software-properties-common unzip && \
     apt-get clean
 
 RUN wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq && \
