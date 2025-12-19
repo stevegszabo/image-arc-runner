@@ -2,6 +2,8 @@ FROM ghcr.io/actions/actions-runner:2.330.0
 
 USER root
 
+RUN snap install yq
+
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y apt-utils apt-transport-https ca-certificates curl gpg gnupg python3 python3-pip software-properties-common unzip && \
