@@ -4,7 +4,7 @@ USER root
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y apt-utils apt-transport-https ca-certificates curl gpg gnupg python3 python3-pip software-properties-common unzip && \
+    apt-get install -y apt-utils apt-transport-https ca-certificates curl gpg gnupg python3 python3-pip software-properties-common unzip yq && \
     apt-get clean
 
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash && \
