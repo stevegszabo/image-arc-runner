@@ -10,6 +10,8 @@ RUN apt-get update && \
 RUN wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq && \
     chmod 755 /usr/local/bin/yq
 
+RUN pip3 install pyyaml
+
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash && \
     apt-get update && \
     apt-get install -y nodejs && \
