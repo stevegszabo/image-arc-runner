@@ -3,7 +3,6 @@
 import os
 import sys
 import yaml
-import json
 import argparse
 
 def generate_image_version(filename):
@@ -16,7 +15,7 @@ def generate_image_version(filename):
 
     if os.getenv("GITHUB_OUTPUT"):
         with open(os.getenv("GITHUB_OUTPUT"), "a", encoding="utf-8") as handle:
-            handle.write(f"image_version={json.dumps(image_version)}\n")
+            handle.write(f"image_version={image_version}\n")
 
     return image_version
 
