@@ -18,6 +18,11 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - run: python3 image/image.py --filename=image/image.yaml --mode=fetch
       id: fetch
+#    - uses: docker/build-push-action@v5
+#      with:
+#        push: true
+#        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ fromJSON(steps.fetch.outputs.image).repository }}:${{ fromJSON(steps.fetch.outputs.image).version }}
+#        context: .
     - run: echo ${{ fromJSON(steps.fetch.outputs.image).repository }}
     - run: echo ${{ fromJSON(steps.fetch.outputs.image).version }}
     - run: python3 image/image.py --filename=image/image.yaml --mode=update
@@ -27,9 +32,3 @@ jobs:
         git add image/image.yaml
         git commit -m "workflow: updated image/image.yaml via github action"
         git push
-
-#    - uses: docker/build-push-action@v5
-#      with:
-#        push: true
-#        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ fromJSON(steps.fetch.outputs.image).repository }}:${{ fromJSON(steps.fetch.outputs.image).version }}
-#        context: .

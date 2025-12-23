@@ -1,2 +1,3 @@
+version: v1.0.1
 repository: arc-runner
-version: v0.0.1
+release: patch
