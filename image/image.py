@@ -61,7 +61,7 @@ if __name__ == "__main__":
         else:
             image_fetch(filename=arguments.filename)
     except Exception as err:
-        sys.stderr.write(f"Unable to {arguments.mode} image: {err}\n")
+        sys.stderr.write(f"Unable to {arguments.mode.lower()} image: {err}\n")
         sys.exit(1)
 
     sys.exit(0)
