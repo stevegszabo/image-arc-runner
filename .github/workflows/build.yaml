@@ -5,7 +5,7 @@ on:
 jobs:
 
   image:
-    runs-on: arc-google
+    runs-on: ubuntu-latest
     outputs:
       workspaces: ${{ steps.image.outputs.image_version }}
     steps:
