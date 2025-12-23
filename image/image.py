@@ -57,7 +57,6 @@ if __name__ == "__main__":
         sys.stdout.write(f"content.repository: [{content['repository']}]\n")
         sys.stdout.write(f"content.version: [{content['version']}]\n")
         sys.stdout.write(f"content.release: [{content['release']}]\n")
-
     except Exception as err:
         sys.stderr.write(f"Unable to {arguments.mode.lower()} image: {err}\n")
         sys.exit(1)
