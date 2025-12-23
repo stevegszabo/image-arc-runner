@@ -7,12 +7,6 @@ import json
 import uuid
 import argparse
 
-def image_operation(filename, mode):
-    if mode == "fetch":
-        return image_fetch(filename)
-    else:
-        return image_update(filename)
-
 def image_fetch(filename):
     with open(filename, "r", encoding="utf-8") as handle:
         content = yaml.safe_load(handle)
@@ -62,7 +56,10 @@ if __name__ == "__main__":
     arguments = parser.parse_args()
 
     try:
-        image_operation(filename=arguments.filename, mode=arguments.mode.lower())
+        if arguments.mode.lower() == "update":
+            image_update(filename=arguments.filename)
+        else:
+            image_fetch(filename=arguments.filename)
     except Exception as err:
         sys.stderr.write(f"Unable to {arguments.mode} image: {err}\n")
         sys.exit(1)
