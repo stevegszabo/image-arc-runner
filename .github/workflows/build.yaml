@@ -1,22 +1,10 @@
-name: image
+name: build
 on:
   push:
     branches: ["ENGINEERING"]
 jobs:
-
-  fetch:
-    runs-on: ubuntu-latest
-    outputs:
-      image: ${{ steps.image.outputs.image }}
-    steps:
-    - uses: actions/checkout@v4
-    - name: Generate image
-      id: image
-      run: python3 image/image.py --filename=image/image.yaml --mode=fetch
-
   build:
     runs-on: ubuntu-latest
-    needs: fetch
     environment: ENGINEERING
     permissions:
       contents: write
@@ -28,8 +16,10 @@ jobs:
         registry: ${{ secrets.DOCKERHUB_REGISTRY }}
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - run: echo ${{ fromJSON(needs.fetch.outputs.image).repository }}
-    - run: echo ${{ fromJSON(needs.fetch.outputs.image).version }}
+    - run: python3 image/image.py --filename=image/image.yaml --mode=fetch
+      id: fetch
+    - run: echo ${{ fromJSON(steps.fetch.outputs.image).repository }}
+    - run: echo ${{ fromJSON(steps.fetch.outputs.image).version }}
     - run: python3 image/image.py --filename=image/image.yaml --mode=update
     - run: |
         git config --global user.name "github-actions[bot]"
@@ -41,5 +31,5 @@ jobs:
 #    - uses: docker/build-push-action@v5
 #      with:
 #        push: true
-#        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ fromJSON(needs.fetch.outputs.image).repository }}:${{ fromJSON(needs.fetch.outputs.image).version }}
+#        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ fromJSON(steps.fetch.outputs.image).repository }}:${{ fromJSON(steps.fetch.outputs.image).version }}
 #        context: .
