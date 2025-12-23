@@ -18,16 +18,15 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - run: python3 image/image.py --filename=image/image.yaml --mode=fetch
       id: fetch
+    - run: echo ${{ fromJSON(steps.fetch.outputs.image).repository }}
+    - run: echo ${{ fromJSON(steps.fetch.outputs.image).version }}
+    - run: echo ${{ fromJSON(steps.fetch.outputs.image).release }}
 
 #    - uses: docker/build-push-action@v5
 #      with:
 #        push: true
 #        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ fromJSON(steps.fetch.outputs.image).repository }}:v${{ fromJSON(steps.fetch.outputs.image).version }}
 #        context: .
-
-    - run: echo ${{ fromJSON(steps.fetch.outputs.image).repository }}
-    - run: echo ${{ fromJSON(steps.fetch.outputs.image).version }}
-    - run: echo ${{ fromJSON(steps.fetch.outputs.image).release }}
 
     - run: python3 image/image.py --filename=image/image.yaml --mode=update
     - run: |
