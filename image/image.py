@@ -7,7 +7,16 @@ import json
 import uuid
 import argparse
 
-def generate_image(filename):
+def image_operation(filename, mode):
+    if mode == "fetch":
+        return image_fetch(filename)
+    else:
+        return image_update(filename)
+
+def image_update(filename):
+    return {}
+
+def image_fetch(filename):
     with open(filename, "r", encoding="utf-8") as handle:
         content = yaml.safe_load(handle)
 
@@ -32,12 +41,13 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Generate image")
     parser.add_argument("--filename", dest="filename", default="image.yaml", help="image filename")
+    parser.add_argument("--mode", dest="mode", default="fetch", help="operation mode")
     arguments = parser.parse_args()
 
     try:
-        generate_image(filename=arguments.filename)
+        image_operation(filename=arguments.filename, mode=arguments.mode.lower())
     except Exception as err:
-        sys.stderr.write(f"Unable to generate image: {err}\n")
+        sys.stderr.write(f"Unable to {arguments.mode} image: {err}\n")
         sys.exit(1)
 
     sys.exit(0)
