@@ -20,7 +20,9 @@ def generate_image(filename):
 
     if os.getenv("GITHUB_OUTPUT"):
         with open(os.getenv("GITHUB_OUTPUT"), "a", encoding="utf-8") as handle:
-            handle.write(f"image={json.dumps(image)}\n")
+            handle.write(f"image<<EOF\n")
+            handle.write(f"{json.dumps(image)}\n")
+            handle.write(f"EOF\n")
 
     return image
 

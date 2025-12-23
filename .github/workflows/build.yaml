@@ -10,7 +10,7 @@ jobs:
       workspaces: ${{ steps.image.outputs.image }}
     steps:
     - uses: actions/checkout@v4
-    - name: Generate image version
+    - name: Generate image
       id: image
       run: python3 image/image.py --filename=image/image.yaml
 
