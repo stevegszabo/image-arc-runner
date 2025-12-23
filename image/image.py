@@ -34,7 +34,7 @@ def image_update(filename):
     with open(filename, "r", encoding="utf-8") as handle:
         content = yaml.safe_load(handle)
 
-    elements = ".".split(content["version"])
+    elements = content["version"].split(".")
 
     if content["release"] == "major":
         elements[0] = elements[0] + 1
