@@ -15,8 +15,8 @@ def generate_image(filename):
         "repository": content.get("repository", "repository")
     }
 
-    sys.stdout.write(f"image.version: [{image.version}]\n")
-    sys.stdout.write(f"image.repository: [{image.repository}]\n")
+    sys.stdout.write(f"image.version: [{image['version']}]\n")
+    sys.stdout.write(f"image.repository: [{image['repository']}]\n")
 
     if os.getenv("GITHUB_OUTPUT"):
         with open(os.getenv("GITHUB_OUTPUT"), "a", encoding="utf-8") as handle:
