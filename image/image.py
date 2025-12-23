@@ -11,10 +11,6 @@ def image_fetch(filename):
     with open(filename, "r", encoding="utf-8") as handle:
         content = yaml.safe_load(handle)
 
-    sys.stdout.write(f"content.repository: [{content['repository']}]\n")
-    sys.stdout.write(f"content.version: [{content['version']}]\n")
-    sys.stdout.write(f"content.release: [{content['release']}]\n")
-
     if os.getenv("GITHUB_OUTPUT"):
         delimiter = f"EOF-{uuid.uuid4()}"
         with open(os.getenv("GITHUB_OUTPUT"), "a", encoding="utf-8") as handle:
@@ -39,10 +35,6 @@ def image_update(filename):
 
     content["version"] = ".".join(version)
 
-    sys.stdout.write(f"content.repository: [{content['repository']}]\n")
-    sys.stdout.write(f"content.version: [{content['version']}]\n")
-    sys.stdout.write(f"content.release: [{content['release']}]\n")
-
     with open(filename, "w") as handle:
         yaml.dump(content, handle)
 
@@ -57,9 +49,14 @@ if __name__ == "__main__":
 
     try:
         if arguments.mode.lower() == "update":
-            image_update(filename=arguments.filename)
+            content = image_update(filename=arguments.filename)
         else:
-            image_fetch(filename=arguments.filename)
+            content = image_fetch(filename=arguments.filename)
+
+        sys.stdout.write(f"content.repository: [{content['repository']}]\n")
+        sys.stdout.write(f"content.version: [{content['version']}]\n")
+        sys.stdout.write(f"content.release: [{content['release']}]\n")
+
     except Exception as err:
         sys.stderr.write(f"Unable to {arguments.mode.lower()} image: {err}\n")
         sys.exit(1)
