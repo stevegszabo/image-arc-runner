@@ -37,11 +37,11 @@ def image_update(filename):
     elements = content["version"].split(".")
 
     if content["release"] == "major":
-        elements[0] = elements[0] + 1
+        elements[0] = str(int(elements[0]) + 1)
     if content["release"] == "minor":
-        elements[1] = elements[1] + 1
+        elements[1] = str(int(elements[1]) + 1)
     if content["release"] == "patch":
-        elements[2] = elements[2] + 1
+        elements[2] = str(int(elements[2]) + 1)
 
     content["version"] = ".".join(elements)
 
