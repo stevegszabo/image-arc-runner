@@ -4,6 +4,7 @@ import os
 import sys
 import yaml
 import json
+import uuid
 import argparse
 
 def generate_image(filename):
@@ -19,10 +20,11 @@ def generate_image(filename):
     sys.stdout.write(f"image.repository: [{image['repository']}]\n")
 
     if os.getenv("GITHUB_OUTPUT"):
+        delimiter = f"EOF-{uuid.uuid4()}"
         with open(os.getenv("GITHUB_OUTPUT"), "a", encoding="utf-8") as handle:
-            handle.write(f"image<<EOF\n")
+            handle.write(f"image<<{delimiter}\n")
             handle.write(f"{json.dumps(image)}\n")
-            handle.write(f"EOF\n")
+            handle.write(f"{delimiter}\n")
 
     return image
 

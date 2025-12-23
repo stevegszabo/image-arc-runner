@@ -7,7 +7,7 @@ jobs:
   image:
     runs-on: ubuntu-latest
     outputs:
-      workspaces: ${{ steps.image.outputs.image }}
+      image: ${{ steps.image.outputs.image }}
     steps:
     - uses: actions/checkout@v4
     - name: Generate image
@@ -29,5 +29,5 @@ jobs:
     - uses: docker/build-push-action@v5
       with:
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ fromJson(needs.image.outputs.image).repository }}:${{ fromJson(needs.image.outputs.image).version }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ fromJSON(needs.image.outputs.image).repository }}:${{ fromJSON(needs.image.outputs.image).version }}
         context: .
