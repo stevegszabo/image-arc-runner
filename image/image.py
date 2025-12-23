@@ -54,9 +54,8 @@ if __name__ == "__main__":
         else:
             content = image_fetch(filename=arguments.filename)
 
-        sys.stdout.write(f"repository: [{content['repository']}]\n")
-        sys.stdout.write(f"version: [{content['version']}]\n")
-        sys.stdout.write(f"release: [{content['release']}]\n")
+        for item in content:
+            sys.stdout.write(f"{item}: [{content[item]}]\n")
     except Exception as err:
         sys.stderr.write(f"Unable to {arguments.mode.lower()} image: {err}\n")
         sys.exit(1)
