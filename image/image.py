@@ -50,7 +50,7 @@ def image_update(filename):
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description="Generate image")
+    parser = argparse.ArgumentParser(description="Generate image version")
     parser.add_argument("--filename", dest="filename", default="image.yaml", help="image filename")
     parser.add_argument("--mode", dest="mode", default="fetch", help="operation mode")
     arguments = parser.parse_args()
