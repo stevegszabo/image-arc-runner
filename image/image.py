@@ -24,13 +24,14 @@ def image_update(filename):
     with open(filename, "r", encoding="utf-8") as handle:
         content = yaml.safe_load(handle)
 
-    version = content["version"].split(".")
+    version = content.get("version", "0.0.0").split(".")
+    release = content.get("release", "patch").lower()
 
-    if content["release"] == "major":
+    if release == "major":
         version[0] = str(int(version[0]) + 1)
-    if content["release"] == "minor":
+    elif release == "minor":
         version[1] = str(int(version[1]) + 1)
-    if content["release"] == "patch":
+    elif release == "patch":
         version[2] = str(int(version[2]) + 1)
 
     content["version"] = ".".join(version)
