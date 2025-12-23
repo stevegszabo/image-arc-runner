@@ -17,9 +17,9 @@ def image_fetch(filename):
     with open(filename, "r", encoding="utf-8") as handle:
         content = yaml.safe_load(handle)
 
-    sys.stdout.write(f"content.version: [{content['version']}]\n")
     sys.stdout.write(f"content.repository: [{content['repository']}]\n")
-    sys.stdout.write(f"content.patch: [{content['patch']}]\n")
+    sys.stdout.write(f"content.version: [{content['version']}]\n")
+    sys.stdout.write(f"content.release: [{content['release']}]\n")
 
     if os.getenv("GITHUB_OUTPUT"):
         delimiter = f"EOF-{uuid.uuid4()}"
@@ -45,8 +45,9 @@ def image_update(filename):
 
     content["version"] = ".".join(elements)
 
-    sys.stdout.write(f"content.version: [{content['version']}]\n")
     sys.stdout.write(f"content.repository: [{content['repository']}]\n")
+    sys.stdout.write(f"content.version: [{content['version']}]\n")
+    sys.stdout.write(f"content.release: [{content['release']}]\n")
 
     with open(filename, "w") as handle:
         yaml.dump(content, handle)
