@@ -28,16 +28,16 @@ def image_update(filename):
     with open(filename, "r", encoding="utf-8") as handle:
         content = yaml.safe_load(handle)
 
-    elements = content["version"].split(".")
+    version = content["version"].split(".")
 
     if content["release"] == "major":
-        elements[0] = str(int(elements[0]) + 1)
+        version[0] = str(int(version[0]) + 1)
     if content["release"] == "minor":
-        elements[1] = str(int(elements[1]) + 1)
+        version[1] = str(int(version[1]) + 1)
     if content["release"] == "patch":
-        elements[2] = str(int(elements[2]) + 1)
+        version[2] = str(int(version[2]) + 1)
 
-    content["version"] = ".".join(elements)
+    content["version"] = ".".join(version)
 
     sys.stdout.write(f"content.repository: [{content['repository']}]\n")
     sys.stdout.write(f"content.version: [{content['version']}]\n")
