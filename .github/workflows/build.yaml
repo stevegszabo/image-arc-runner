@@ -29,5 +29,5 @@ jobs:
     - uses: docker/build-push-action@v5
       with:
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.workflow }}:${{ fromJson(needs.image.outputs.image) }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ fromJson(needs.image.outputs.image).repository }}:${{ fromJson(needs.image.outputs.image).version }}
         context: .
