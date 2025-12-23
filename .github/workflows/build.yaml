@@ -18,9 +18,9 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - run: python3 image/image.py --filename=image/image.yaml --mode=fetch
       id: fetch
-    - run: echo ${{ fromJSON(steps.fetch.outputs.image).repository }}
-    - run: echo ${{ fromJSON(steps.fetch.outputs.image).version }}
-    - run: echo ${{ fromJSON(steps.fetch.outputs.image).release }}
+    - run: echo image.repository:${{ fromJSON(steps.fetch.outputs.image).repository }}
+    - run: echo image.version:${{ fromJSON(steps.fetch.outputs.image).version }}
+    - run: echo image.release:${{ fromJSON(steps.fetch.outputs.image).release }}
 
 #    - uses: docker/build-push-action@v5
 #      with:
