@@ -1,5 +1,7 @@
 name: arc-runner
-on: [push]
+on:
+  push:
+    branches: ["ENGINEERING"]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,9 +14,9 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         registry: ${{ secrets.DOCKERHUB_REGISTRY }}
-    - run: echo "ARC_RUNNER_VERSION=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
-    - uses: docker/build-push-action@v5
-      with:
-        push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.workflow }}:${{ env.ARC_RUNNER_VERSION }}
-        context: .
+#    - run: echo "ARC_RUNNER_VERSION=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
+#    - uses: docker/build-push-action@v5
+#      with:
+#        push: true
+#        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.workflow }}:${{ env.ARC_RUNNER_VERSION }}
+#        context: .
