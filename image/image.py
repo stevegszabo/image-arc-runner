@@ -10,9 +10,10 @@ def generate_image(filename):
     with open(filename, "r", encoding="utf-8") as handle:
         content = yaml.safe_load(handle)
 
-    image = {}
-    image.version = content.get("version", "v0.0.0")
-    image.repository = content.get("repository", "repository")
+    image = {
+        "version": content.get("version", "v0.0.0"),
+        "repository": content.get("repository", "repository")
+    }
 
     sys.stdout.write(f"image.version: [{image.version}]\n")
     sys.stdout.write(f"image.repository: [{image.repository}]\n")
