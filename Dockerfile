@@ -1,5 +1,7 @@
 FROM ghcr.io/actions/actions-runner:2.330.0
 
+LABEL CLOUDSERV_ACTION_RUNNER_VERSION=2.330.0
+
 USER root
 
 RUN apt-get update && \
