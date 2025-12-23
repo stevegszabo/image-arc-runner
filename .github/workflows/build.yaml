@@ -1,4 +1,4 @@
-name: arc-runner
+name: build
 on:
   push:
     branches: ["ENGINEERING"]
@@ -19,15 +19,16 @@ jobs:
     needs: image
     environment: ENGINEERING
     steps:
-    - uses: actions/checkout@v4
     - uses: docker/setup-buildx-action@v3
     - uses: docker/login-action@v3
       with:
         registry: ${{ secrets.DOCKERHUB_REGISTRY }}
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - uses: docker/build-push-action@v5
-      with:
-        push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ fromJSON(needs.image.outputs.image).repository }}:${{ fromJSON(needs.image.outputs.image).version }}
-        context: .
+    - run: echo ${{ fromJSON(needs.image.outputs.image).repository }}
+    - run: echo ${{ fromJSON(needs.image.outputs.image).version }}
+#    - uses: docker/build-push-action@v5
+#      with:
+#        push: true
+#        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ fromJSON(needs.image.outputs.image).repository }}:${{ fromJSON(needs.image.outputs.image).version }}
+#        context: .
