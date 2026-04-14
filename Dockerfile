@@ -7,7 +7,7 @@ RUN apt-get update && \
     apt-get install -y apt-utils apt-transport-https ca-certificates curl wget gpg gnupg python3 python3-pip software-properties-common unzip && \
     apt-get clean
 
-RUN apt install -y python3-pyyaml
+RUN apt-get install -y python3-yaml
 
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash && \
     apt-get update && \
