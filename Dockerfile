@@ -7,7 +7,7 @@ RUN apt-get update && \
     apt-get install -y apt-utils apt-transport-https ca-certificates curl wget gpg gnupg python3 python3-pip python3-venv software-properties-common unzip && \
     apt-get clean
 
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash && \
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash && \
     apt-get update && \
     apt-get install -y nodejs && \
     apt-get clean
